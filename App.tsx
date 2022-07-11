@@ -9,6 +9,7 @@ import {useState} from 'react';
 import SignIn from './src/pages/SignIn';
 import SignUp from './src/pages/SignUp';
 
+//1. 로그인 완료 했을 때
 export type LoggedInParamList = {
   Orders: undefined; //주문화면
   Settings: undefined; // 로그아웃, 정산 등 화면
@@ -17,6 +18,7 @@ export type LoggedInParamList = {
   Complete: {orderId: string}; // 문자열인 orderId 파라미터(변수)를 주문화면에서 넘겨줄 거임
 };
 
+//2. 로그인 안했을 때 로 나눔
 export type RootStackParamList = {
   SignIn: undefined; // 로그인 화면
   SignUp: undefined; // 회원가입 화면
@@ -29,7 +31,7 @@ function App() {
   const [isLoggedIn, setLoggedIn] = useState(false);
   return (
     <NavigationContainer>
-      {isLoggedIn ? (
+      {isLoggedIn ? ( //조건문, 로그인 되어있으면 
         <Tab.Navigator>
           <Tab.Screen
             name="Orders"
@@ -37,7 +39,7 @@ function App() {
             options={{title: '오더 목록'}}
           />
           <Tab.Screen
-            name="Delivery"
+            name="Delivery" // 안에 complete 있음
             component={Delivery}
             options={{headerShown: false}}
           />
@@ -48,6 +50,7 @@ function App() {
           />
         </Tab.Navigator>
       ) : (
+        // 로그인 안되어있으면
         <Stack.Navigator>
           <Stack.Screen
             name="SignIn"
